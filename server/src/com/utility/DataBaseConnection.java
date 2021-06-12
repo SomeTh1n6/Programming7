@@ -13,11 +13,13 @@ public class DataBaseConnection {
     public void connect(){
         try {
             Class.forName("org.postgresql.Driver");
+            String login = readLogin();
             String ps = readPassword();
+            
             // connection = DriverManager.getConnection("jdbc:postgresql://localhost:5430/studs",
-            //        "s311736", ps);
+            //        login, ps);
             connection = DriverManager.getConnection("jdbc:postgresql://pg:5432/studs",
-                         "s311736", ps);
+                         login, ps);
         } catch (ClassNotFoundException e) {
             System.out.println("Postgresql Driver не может быть найден");
             System.exit(1);
@@ -35,6 +37,12 @@ public class DataBaseConnection {
     private String readPassword() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Введите пароль: ");
+        return scanner.nextLine();
+    }
+    
+    private String readLogin() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Введите логин: ");
         return scanner.nextLine();
     }
 
